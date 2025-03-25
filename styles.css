@@ -1,0 +1,35 @@
+.tutorial{
+    width: 600 px;
+    text-align: center;
+    margin: auto;
+}
+figure.image{
+    display: flex;
+    justify-content: center;
+    background-color: black;
+
+
+}
+fire.image ing {
+    width: 128px;
+}
+.notificacion{
+    margin-top: 20px 
+    !important;
+}
+.title .icon{
+    margin-bottom: 15px;
+}
+
+
+.hero {
+    margin-bottom: 20px;
+}
+
+
+.forms{
+ display: flex;
+ justify-content: space-around;
+}
+
+
