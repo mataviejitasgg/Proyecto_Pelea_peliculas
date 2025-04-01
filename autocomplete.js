@@ -15,7 +15,7 @@ const input = root.querySelector("input")
 const dropdown = root.querySelector(".dropdown")
 const resultWrapper = root.querySelector(".result")
 
-const debonce = (func, delay = 1000) =>{
+const debounce = (func, delay = 1000) =>{
     let timeoutld
     return(...args)=> {
         clearTimeout(timeoutld)
@@ -38,14 +38,20 @@ const onInput = async event =>{
     for (let item of items){
         const option = document.createElement("a")
 
-        option.classList.add("dropdown-item")
+        option.classlist.add("dropdown-item")
         option.innerHTML = renderOption(item)
         option.addEventListener("click", () => {
-            dropdown.classList.remove("is-active")
+            dropdown.classlist.remove("is-active")
             input.value = inputValue(item)
             onOptionSelect(item)
-            console.log("OnMoviesSelect")
+            console.log("OnMovieSelect")
         })
         resultWrapper.appendChild(option)
     }
+    input.addEventListener("input", debounce(onInput, 1000))
+    document.addEventListener("click", event => {
+        if(!root.contains(event.target)){
+            dropdown.classlist.remove("is-active")
+        }
+    })
 }
