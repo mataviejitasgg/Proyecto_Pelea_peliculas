@@ -43,6 +43,26 @@ const runComparison = () => {
         }
     })
 }
+const MovieTemplate = (MovieDetails) => {
+    // Transformar a numeros los strings que llegan de los datos
+    const dollars = parseInt(MovieDetails.Boxoffice.replace(/\$/g, "").replace(/,/g, ""))
+    console.log(dollars)
+    const metascore = parseInt(MovieDetails.MetaScore)
+    const imdbRating = parseFloat(MovieDetails.imdbRating)
+    const imdbVotes = parseInt (MovieDetails.imdbVotes.replace(/,/g, ""))
+    console.log(metascore, imdbRating, imdbVotes)
+    const awards = MovieDetails.awards.split("").reduce((prev,word) => {
+        const value = parseInt(word)
+
+        if(isNaN(value)){
+            return prev
+        }else{
+            return prev + value
+        }
+        
+    },0)
+    console.log("awards", awards)
+}
 
 
 //feachData()
