@@ -1,20 +1,48 @@
 const fetchData = async (searchTerm) => {
     const response = await axios.get('https://omdbapi.com/',{
         params: {
-            apikey:'4e21988b',
-            s:'avengers'
+            apikey: "ad36e279",
+            i: movie.imdbID
         }
     })
+    console.log(response.data)
+    summaryElement.innerHTML = movieTemplate(response.data)
 
+        //preguntamos cual lado es?
+    if(side === "left"){
+        Leftmovie = response.data
 
-if(response.data.Error){
-    return[]
+    }else{
+        rightMovie = response.data
+    }
+    //preguntamos si tenemos ambos lados
+    if(Leftmovie && rightMovie){
+        //entonces ejecutamos la funcion de comparacion
+        runComparison()
+
+    }
+
 }
 
+const runComparison = () => {
+    console.log("comparacion de peliculas")
+    const leftSideStats = document.querySelector("left-summary . notification")
+    const rightSideStats = document.querySelector("rightft-summary . notification")
+    leftSideStats.foreach((leftStat, index) =>{
+        const rightStat = rightSideStats[index]
+        const leftSideValue = parseInt(leftStat.dataset.value)
+        const rightSideValue = parseInt(rightSideStats.dataset.value)
+        
+        if(rightSideValue > leftSideValue){
+            leftStat.classList.remove("is-primary")
+            leftStat.classList.add("is-danger")
+        }else{
+            rightStat.classList.remove("is-primary")
+            rightStat.classList.add("is-danger")
 
-console.log(response.data.Search)
+        }
+    })
 }
-fetchData()
 
 
 //feachData()
@@ -35,7 +63,7 @@ const dropdown = document.querySelector('.dropdwon')
 const resultswrapper = document.querySelector('.results')
 
 
-const debonce = (func, delay = 1000) =>{
+const debounce = (func, delay = 1000) =>{
     let timeoutld
     return(...args)=> {
         clearTimeout(timeoutld)
@@ -86,7 +114,7 @@ document.addEventListener( "clicl", Event => {
 const onMovieSelect = async (movie) =>{
     const response = await axios.get("https://www.omdbapi.com/", {
         params: {
-            apikey: "",
+            apikey: "ad36e279",
             i: movie,imbID
         }
     })
@@ -95,7 +123,7 @@ const onMovieSelect = async (movie) =>{
 }
 
 const movieTemplate = (movieTemplate) => {
-    return 
+    return `
     <article class="media">
         <figure class="media-left">
         <p class="image">
@@ -110,5 +138,6 @@ const movieTemplate = (movieTemplate) => {
         </div>
         </div>
     </article>
+    `
 }
 
